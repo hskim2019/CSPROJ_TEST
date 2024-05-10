@@ -1,0 +1,10 @@
+{
+  "dotnet.defaultSolution": "DotNet.sln",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "keyboard.dispatch": "keyCode",
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "editor.formatOnPaste": true
+}
