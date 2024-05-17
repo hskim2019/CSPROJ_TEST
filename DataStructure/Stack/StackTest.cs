@@ -15,7 +15,7 @@ namespace DotNet.DataStructure.Stack
         max = size;
     }
 
-    public void push(int item)
+    public void push(int item) 
     {
         if (top == max - 1) {
             Console.WriteLine("Stack Overflow");
@@ -40,7 +40,7 @@ namespace DotNet.DataStructure.Stack
             var testValue = ele[top--];
             Console.WriteLine(testValue);
             Console.WriteLine(top);
-            return testValue;
+            return testValue; 
             //return ele[top--];
         }
     }
