@@ -3,6 +3,7 @@
 using System;
 using DotNet.DataStructure;
 using DotNet.DataStructure.LinkedList;
+using DotNet.DataStructure.Stack;
 namespace DotNet {
 
     class Program {
@@ -26,11 +27,17 @@ namespace DotNet {
             //FindTheMiddle findTheMiddle = new FindTheMiddle();
             //findTheMiddle.Test();
 
-             CircularTest circularTest = new CircularTest();
-             circularTest.Test();
+            //CircularTest circularTest = new CircularTest();
+            //circularTest.Test();
 
             //ExchangeCircularNodeTest exchangeCircular = new ExchangeCircularNodeTest();
             //exchangeCircular.Test();
+
+            // StackTest stackTest = new StackTest();
+            // stackTest.Test();
+
+            ParenthesisChecker parenthesisChecker= new ParenthesisChecker();    
+            parenthesisChecker.Test();
 
         }
     }
