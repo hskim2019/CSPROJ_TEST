@@ -21,8 +21,8 @@ namespace DotNet {
             //ArrayTest arrayTest = new ArrayTest();
             //arrayTest.Test();
 
-            //Example exampleTest = new Example();
-            //exampleTest.Test(); 
+             Example exampleTest = new Example();
+             exampleTest.Test(); 
 
             //FindTheMiddle findTheMiddle = new FindTheMiddle();
             //findTheMiddle.Test();
@@ -36,8 +36,13 @@ namespace DotNet {
             // StackTest stackTest = new StackTest();
             // stackTest.Test();
 
-            ParenthesisChecker parenthesisChecker= new ParenthesisChecker();    
-            parenthesisChecker.Test();
+            // https://www.geeksforgeeks.org/problems/parenthesis-checker2744/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article
+            // ParenthesisChecker parenthesisChecker= new ParenthesisChecker();    
+            // parenthesisChecker.Test();
+
+            // https://www.geeksforgeeks.org/problems/evaluation-of-postfix-expression1735/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article
+            // EvaluationOfPostfixExpression evaluationOfPostfixExpression = new EvaluationOfPostfixExpression();  
+            // evaluationOfPostfixExpression.Test();
 
         }
     }
