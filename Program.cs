@@ -4,6 +4,8 @@ using System;
 using DotNet.DataStructure;
 using DotNet.DataStructure.LinkedList;
 using DotNet.DataStructure.Stack;
+using DotNet.DataStructure.Heap;
+
 namespace DotNet {
 
     class Program {
@@ -21,8 +23,8 @@ namespace DotNet {
             //ArrayTest arrayTest = new ArrayTest();
             //arrayTest.Test();
 
-             Example exampleTest = new Example();
-             exampleTest.Test(); 
+            //Example exampleTest = new Example();
+            //exampleTest.Test(); 
 
             //FindTheMiddle findTheMiddle = new FindTheMiddle();
             //findTheMiddle.Test();
@@ -43,6 +45,10 @@ namespace DotNet {
             // https://www.geeksforgeeks.org/problems/evaluation-of-postfix-expression1735/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article
             // EvaluationOfPostfixExpression evaluationOfPostfixExpression = new EvaluationOfPostfixExpression();  
             // evaluationOfPostfixExpression.Test();
+
+            // https://www.geeksforgeeks.org/problems/is-binary-tree-heap/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article
+            IsBinaryTreeHeap isBinaryTreeHeap = new IsBinaryTreeHeap();
+            isBinaryTreeHeap.Test();
 
         }
     }
