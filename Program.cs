@@ -47,8 +47,12 @@ namespace DotNet {
             // evaluationOfPostfixExpression.Test();
 
             // https://www.geeksforgeeks.org/problems/is-binary-tree-heap/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article
-            IsBinaryTreeHeap isBinaryTreeHeap = new IsBinaryTreeHeap();
-            isBinaryTreeHeap.Test();
+            // IsBinaryTreeHeap isBinaryTreeHeap = new IsBinaryTreeHeap();
+            // isBinaryTreeHeap.Test();
+            
+            //https://www.geeksforgeeks.org/heap-sort/
+            HeapSort heapSort = new HeapSort();
+            heapSort.Test();
 
         }
     }
