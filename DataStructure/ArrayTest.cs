@@ -10,7 +10,7 @@ namespace DotNet.DataStructure
             // if the array elements are of object type then the default value is null
             // 순서가 있고 중복을 허용
             // 인덱스로 접근 가능
-            // 크기가 가변적이다
+            // 크기가 가변적이다 
             List<int> array = new List<int>();
             Console.WriteLine(array.Count); // 0
             // array.Add(1);
