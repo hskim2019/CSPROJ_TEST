@@ -6,5 +6,8 @@
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
-  "editor.formatOnPaste": true
+  "editor.formatOnPaste": true,
+  "[csharp]": {
+    "editor.defaultFormatter": "csharpier.csharpier-vscode"
+  }
 }
