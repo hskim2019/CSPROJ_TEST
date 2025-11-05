@@ -30,7 +30,7 @@ namespace DotNet.TestSet
             // 미리 타입을 선언할 수 있고 박싱, 언박싱이 없는 딕셔너리 사용
             Dictionary<string, int> clothesCnt = new Dictionary<string, int>();
 
-            for (int i = 0; i < clothes.GetLength(0); i++)
+            for (int i = 0; i < clothes.GetLength(0); i++) // GetLength 행의 개수
             {
                 string type = clothes[i, 1];
                 if (clothesCnt.ContainsKey(type))
