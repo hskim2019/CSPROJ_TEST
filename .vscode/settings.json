@@ -1,6 +1,6 @@
 {
   "dotnet.defaultSolution": "DotNet.sln",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "ms-dotnettools.csharp",
   "editor.formatOnSave": true,
   "keyboard.dispatch": "keyCode",
   "[javascript]": {
@@ -8,6 +8,6 @@
   },
   "editor.formatOnPaste": true,
   "[csharp]": {
-    "editor.defaultFormatter": "csharpier.csharpier-vscode"
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
   }
 }

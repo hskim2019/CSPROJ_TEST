@@ -3,16 +3,15 @@ using DotNet.DataStructure;
 using DotNet.DataStructure.Heap;
 using DotNet.DataStructure.LinkedList;
 using DotNet.DataStructure.Stack;
-using DotNet.TestSet;
 
 namespace DotNet
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            ExecuteTest();
-        }
+        // static void Main(string[] args)
+        // {
+        //     ExecuteTest();
+        // }
 
         private static void ExecuteTest()
         {
@@ -54,8 +53,7 @@ namespace DotNet
             //  heapSort.Test();
 
             //https://school.programmers.co.kr/learn/courses/30/lessons/42578?language=csharp
-            Pr_Hash_42578 prHash = new Pr_Hash_42578();
-            prHash.test();
+
         }
     }
 }
