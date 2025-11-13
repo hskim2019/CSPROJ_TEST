@@ -1,32 +1,33 @@
 
+using System.Collections.Generic;
 
 var sol = new Solution();
-string[,] testCase = new string[,]
+var testCase = new string[,]
 {
     {"hat", "headgear"},
-    {"sunglass", "eyewear"}
+{"sunglass", "eyewear"}
 };
 Console.WriteLine(sol.solution(testCase));
 
 public class Solution
 {
-    public int solution(string[,] clothes)
+    public int solution(string[,] clohtes)
     {
         int answer = 1;
-        Dictionary<string, int> clotheCnt = new Dictionary<string, int>();
-        for (int i = 0; i < clothes.GetLength(0); i++)
+        Dictionary<string, int> clohtesCnt = new Dictionary<string, int>();
+        for (int i = 0; i < clohtes.GetLength(0); i++)
         {
-            string type = clothes[i, 1];
-            if (clotheCnt.ContainsKey(clothes[i, 1]))
+            string type = clohtes[i, 1];
+            if (clohtesCnt.ContainsKey(type))
             {
-                clotheCnt[clothes[i, 1]]++;
+                clohtesCnt[type]++;
             }
             else
             {
-                clotheCnt[clothes[i, 1]] = 1;
+                clohtesCnt[type] = 2;
             }
         }
-        foreach (int count in clotheCnt.Values)
+        foreach (int count in clohtesCnt.Values)
         {
             answer *= (count + 1);
         }

@@ -15,9 +15,6 @@ namespace DotNet
 
         private static void ExecuteTest()
         {
-            //HashTest hashTest = new HashTest();
-            //hashTest.Test();
-
             //ArrayTest arrayTest = new ArrayTest();
             //arrayTest.Test();
 
@@ -43,14 +40,6 @@ namespace DotNet
             // https://www.geeksforgeeks.org/problems/evaluation-of-postfix-expression1735/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article
             // EvaluationOfPostfixExpression evaluationOfPostfixExpression = new EvaluationOfPostfixExpression();
             // evaluationOfPostfixExpression.Test();
-
-            // https://www.geeksforgeeks.org/problems/is-binary-tree-heap/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article
-            // IsBinaryTreeHeap isBinaryTreeHeap = new IsBinaryTreeHeap();
-            // isBinaryTreeHeap.Test();
-
-            //https://www.geeksforgeeks.org/heap-sort/
-            //  HeapSort heapSort = new HeapSort();
-            //  heapSort.Test();
 
             //https://school.programmers.co.kr/learn/courses/30/lessons/42578?language=csharp
 
