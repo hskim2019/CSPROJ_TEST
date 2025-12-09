@@ -1,37 +1,18 @@
-
-using System.Collections.Generic;
+using System;
+using System.Linq;
 
 var sol = new Solution();
-var testCase = new string[,]
-{
-    {"hat", "headgear"},
-{"sunglass", "eyewear"}
-};
-Console.WriteLine(sol.solution(testCase));
+int[] array = { 3, 30, 34, 5, 9 };
+Console.Write(sol.solution(array));
 
 public class Solution
 {
-    public int solution(string[,] clohtes)
+    public string solution(int[] array)
     {
-        int answer = 1;
-        Dictionary<string, int> clohtesCnt = new Dictionary<string, int>();
-        for (int i = 0; i < clohtes.GetLength(0); i++)
-        {
-            string type = clohtes[i, 1];
-            if (clohtesCnt.ContainsKey(type))
-            {
-                clohtesCnt[type]++;
-            }
-            else
-            {
-                clohtesCnt[type] = 2;
-            }
-        }
-        foreach (int count in clohtesCnt.Values)
-        {
-            answer *= (count + 1);
-        }
-        answer--;
+        string answer;
+        var stringNum = array.Select(n => n.ToString()).ToArray();
+        Array.Sort(stringNum, (a, b) => (b + a).CompareTo((a + b)));
+        answer = String.Join("", stringNum);
         return answer;
     }
 }

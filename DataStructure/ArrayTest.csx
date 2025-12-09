@@ -1,10 +1,21 @@
-// 📌 이 코드는 배열과 리스트의 기본 동작을 테스트하고,
-// 📌 두 배열 간의 차집합 및 중복 요소 계산을 수행하는 알고리즘을 포함합니다.
-// 📌 배열과 리스트의 차이, 초기값, 인덱스 접근, 중복 허용 여부 등을 실습할 때 유용합니다.
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+// 📌 이 코드는 배열과 리스트의 기본 동작을 테스트하고,
+// 📌 두 배열 간의 차집합 및 중복 요소 계산을 수행하는 알고리즘을 포함합니다.
+// 📌 배열과 리스트의 차이, 초기값, 인덱스 접근, 중복 허용 여부 등을 실습할 때 유용합니다.
+// 📌 주요 함수 활용:
+//   - Array.Sort() : 오름차순 정렬
+//   - Array.Sort(array, (a, b) => b.CompareTo(a)) : 내림차순 정렬
+//   - Array.Reverse() : 배열 순서를 역순으로 뒤집기
+//   - Array.Copy(source, sourceIndex, dest, destIndex, length) : 배열 복사
+//   - Array.Exists(array, predicate) : 조건 만족 요소 존재 여부 확인
+//   - Enumerable.Except() : 차집합
+//   - Enumerable.Intersect() : 교집합
+//   - Enumerable.Union() : 합집합
+//   - Enumerable.Count() : 요소 개수 반환
+//   - List<T>.Count : 리스트 요소 개수 확인
 
 // List<int>는 크기가 가변적이며, 초기에는 Count가 0
 List<int> array = new List<int>();
@@ -61,10 +72,22 @@ int Calculate2(int[] a, int n, int[] b, int m)
     var result = a.Length + b.Length;
     foreach (int value in b)
     {
-        if (Array.Exists(a, x => x == value))
+        if (Array.Exists(a, x => x == value)) // 특정 값이 존재하는지 확인
         {
             result -= 1;
         }
     }
     return result;
 }
+
+// 📌 Array.Copy 예시
+int[] source = { 10, 20, 30, 40, 50 };
+int[] dest = new int[3];
+Array.Copy(source, 1, dest, 0, 3); // source[1]부터 3개를 dest[0]부터 채움
+// 결과: dest = {20, 30, 40}
+
+// 📌 정렬 예시
+int[] arr = { 5, 2, 8, 1 };
+Array.Sort(arr); // 오름차순 {1, 2, 5, 8}
+Array.Sort(arr, (a, b) => b.CompareTo(a)); // 내림차순 {8, 5, 2, 1}
+Array.Reverse(arr); // 현재 배열 순서를 단순히 뒤집음
