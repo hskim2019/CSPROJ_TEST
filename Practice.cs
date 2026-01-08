@@ -8,6 +8,6 @@ public class Solution
         // 4. 점수 계산 후 반환
     }
 
-    public List<
+
 
 }
