@@ -1,18 +1,13 @@
-int[] citations = { 3, 0, 6, 1, 5 };
-var sol = new Solution();
-Console.WriteLine(sol.solution(citations));
-
 public class Solution
 {
-    public int solution(int[] citations)
+    public int solution(int[,] game_board, int[,] table)
     {
-        var result = 0;
-        for (var i = 0; i < citations.Length; i++)
-        {
-            var target = citations[i];
-            var greaterCount = citations.Count(n => n >= target);
-            if (greaterCount == target) result = target;
-        }
-        return result;
+        // 1. table에서 퍼즐 조각 추출
+        // 2. game_board에서 빈 칸 추출
+        // 3. 모양 비교 및 매칭
+        // 4. 점수 계산 후 반환
     }
+
+    public List<
+
 }
