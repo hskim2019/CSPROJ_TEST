@@ -1,18 +1,18 @@
-using System;
-using System.Linq;
-
+int[] citations = { 3, 0, 6, 1, 5 };
 var sol = new Solution();
-int[] array = { 3, 30, 34, 5, 9 };
-Console.Write(sol.solution(array));
+Console.WriteLine(sol.solution(citations));
 
 public class Solution
 {
-    public string solution(int[] array)
+    public int solution(int[] citations)
     {
-        string answer;
-        var stringNum = array.Select(n => n.ToString()).ToArray();
-        Array.Sort(stringNum, (a, b) => (b + a).CompareTo((a + b)));
-        answer = String.Join("", stringNum);
-        return answer;
+        var result = 0;
+        for (var i = 0; i < citations.Length; i++)
+        {
+            var target = citations[i];
+            var greaterCount = citations.Count(n => n >= target);
+            if (greaterCount == target) result = target;
+        }
+        return result;
     }
 }

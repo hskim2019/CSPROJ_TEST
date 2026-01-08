@@ -11,6 +11,7 @@ using System.Linq;
 //   - Array.Reverse() : 배열 순서를 역순으로 뒤집기
 //   - Array.Copy(source, sourceIndex, dest, destIndex, length) : 배열 복사
 //   - Array.Exists(array, predicate) : 조건 만족 요소 존재 여부 확인
+//   - Array.ConvertAll(array, converter) : 배열 요소 타입 변환
 //   - Enumerable.Except() : 차집합
 //   - Enumerable.Intersect() : 교집합
 //   - Enumerable.Union() : 합집합
@@ -58,6 +59,29 @@ rv = Calculate(x, x.Length, y, y.Length);
 rv2 = Calculate2(x, x.Length, y, y.Length);
 Console.WriteLine("result : " + rv + " result2 : " + rv2);
 
+// ConvertAll 예시
+// 숫자배열을 문자열 배열로
+int[] numbers = { 3, 30, 34, 5, 9 };
+string[] strArray = Array.ConvertAll(numbers, x => x.ToString());
+// 결과: {"3", "30", "34", "5", "9"}
+
+// 문자열 배열을 숫자 배열로
+string[] strArray = { "10", "20", "30" };
+int[] intArray = Array.ConvertAll(strArray, int.Parse);
+// 결과: {10, 20, 30}
+
+// 변환 시 커스텀 로직 적용
+int[] numbers = { 1, 2, 3 };
+string[] strArray = Array.ConvertAll(numbers, x => $"No.{x}");
+// 결과: {"No.1", "No.2", "No.3"}
+
+// 배열 ↔ 리스트 변환
+int[] arr = { 1, 2, 3 };
+List<int> list = arr.ToList();        // 배열 → 리스트
+int[] arr2 = list.ToArray();          // 리스트 → 배열
+
+
+
 // 📌 Calculate 함수: a에서 b를 제외한 차집합의 개수 + b의 길이
 int Calculate(int[] a, int n, int[] b, int m)
 {
@@ -89,5 +113,6 @@ Array.Copy(source, 1, dest, 0, 3); // source[1]부터 3개를 dest[0]부터 채�
 // 📌 정렬 예시
 int[] arr = { 5, 2, 8, 1 };
 Array.Sort(arr); // 오름차순 {1, 2, 5, 8}
-Array.Sort(arr, (a, b) => b.CompareTo(a)); // 내림차순 {8, 5, 2, 1}
+Array.Sort(arr, (a, b) => b.CompareTo(a)); // 내림차순 {8, 5, 2, 1} 
+// x.CompareTo(y) x가 y보다 작으면? 반환값 음수, 음수이면 x 를 더 앞에 정렬
 Array.Reverse(arr); // 현재 배열 순서를 단순히 뒤집음
