@@ -30,8 +30,8 @@ public class Solution
     {
 
         // 1. table에서 퍼즐 조각 추출
-        
-    var pieces = ExtractPieces(table);
+
+        var pieces = ExtractPieces(table);
 
         // 2. game_board에서 빈 칸 추출
         var blanks = ExtractBlanks(game_board);
@@ -39,17 +39,23 @@ public class Solution
 
         int score = 0;
 
-    foreach (var blank in blanks) {
-    foreach (var piece in pieces.ToList()) {
-        if (blank.Count == piece.Count && Match(blank, piece)) {
-            score += blank.Count; // 빈 칸 크기만큼 점수 추가
-            pieces.Remove(piece); // 사용한 퍼즐 제거
-            break;
+        foreach (var blank in blanks)
+        {
+            // foreach 는 IEnumerable 을 이용해서 순회하는데, 
+            // List<T> 컬렉션이 중간에 수정되므로(Remove) 버전 번호가 바뀌고
+            // InvalidOperationException이 발생할 수 있으므로 ToList()로 복사를 하여 사용
+            foreach (var piece in pieces.ToList())
+            {
+                if (blank.Count == piece.Count && Match(blank, piece))
+                {
+                    score += blank.Count; // 빈 칸 크기만큼 점수 추가
+                    pieces.Remove(piece); // 사용한 퍼즐 제거
+                    break;
+                }
+            }
         }
-    }
-}
 
-    return score;
+        return score;
 
         // 4. 점수 계산 후 반환
     }
@@ -169,35 +175,39 @@ public class Solution
 
     // 3. 모양 비교 및 매칭
     // 3-1. 좌표 정규화
-    public List<(int,int)> Normalize(List<(int,int)> shape) {
-    int minX = shape.Min(p => p.Item1);
-    int minY = shape.Min(p => p.Item2);
-    return shape.Select(p => (p.Item1 - minX, p.Item2 - minY))
-                .OrderBy(p => p.Item1).ThenBy(p => p.Item2)
-                .ToList();
-}
-
-// 3-2. 회전 함수
-// 90도 회전 : (x, y) -> (y, -x)
-// 180도 회전 : (x, y) -> (-x, -y)
-// 270도 회전 : (x, y) -> (-y, x)
-public List<(int,int)> Rotate(List<(int,int)> shape) {
-    return shape.Select(p => (p.Item2, -p.Item1)).ToList();
-}
-
-// 3-3. 모양 비교 함수
-// 크기(조표 개수)가 같아야 하고
-// 정규화된 좌표 집합이 동일해야 함
-// 퍼즐 조각을 회전 4번 시도해서 하나라도 맞으면 매칭
-public bool Match(List<(int,int)> blank, List<(int,int)> piece) {
-    var normBlank = Normalize(blank);
-    var rotated = piece;
-
-    for (int i = 0; i < 4; i++) {
-        var normPiece = Normalize(rotated);
-        if (normBlank.SequenceEqual(normPiece)) return true;
-        rotated = Rotate(rotated);
+    public List<(int, int)> Normalize(List<(int, int)> shape)
+    {
+        int minX = shape.Min(p => p.Item1);
+        int minY = shape.Min(p => p.Item2);
+        return shape.Select(p => (p.Item1 - minX, p.Item2 - minY))
+                    .OrderBy(p => p.Item1).ThenBy(p => p.Item2)
+                    .ToList();
     }
-    return false;
-}
+
+    // 3-2. 회전 함수
+    // 90도 회전 : (x, y) -> (y, -x)
+    // 180도 회전 : (x, y) -> (-x, -y)
+    // 270도 회전 : (x, y) -> (-y, x)
+    public List<(int, int)> Rotate(List<(int, int)> shape)
+    {
+        return shape.Select(p => (p.Item2, -p.Item1)).ToList();
+    }
+
+    // 3-3. 모양 비교 함수
+    // 크기(조표 개수)가 같아야 하고
+    // 정규화된 좌표 집합이 동일해야 함
+    // 퍼즐 조각을 회전 4번 시도해서 하나라도 맞으면 매칭
+    public bool Match(List<(int, int)> blank, List<(int, int)> piece)
+    {
+        var normBlank = Normalize(blank);
+        var rotated = piece;
+
+        for (int i = 0; i < 4; i++)
+        {
+            var normPiece = Normalize(rotated);
+            if (normBlank.SequenceEqual(normPiece)) return true;
+            rotated = Rotate(rotated);
+        }
+        return false;
+    }
 }
