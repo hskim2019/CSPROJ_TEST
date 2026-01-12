@@ -26,7 +26,6 @@ int[,] table = new int[,] {
 };
 // result = 14
 
-
 var sol = new Solution();
 Console.WriteLine(sol.solution(game_board, table));
 
