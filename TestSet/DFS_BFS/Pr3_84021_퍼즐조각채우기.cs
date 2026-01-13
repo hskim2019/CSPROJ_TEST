@@ -36,7 +36,7 @@ public class Solution
     {
         public int X;
         public int Y;
-        public Point(int x, int y) { X = x; Y = y; }
+        public Point(int x, int y) { X = x; Y = y; } // 초기값을 지정할 수 있게 해주는 생성자
     }
 
     public int solution(int[,] game_board, int[,] table)
