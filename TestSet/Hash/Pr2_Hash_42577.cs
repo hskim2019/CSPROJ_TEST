@@ -29,9 +29,18 @@
 
 // c# 으로는 제출 할 수 없음
 
-class Solution {
-    public boolean solution(String[] phone_book) {
-        boolean answer = true;
-        return answer;
+string[] phone_book = { "119", "97674223", "1195524421" };
+var sol = new Solution();
+Console.WriteLine(sol.solution(phone_book));
+class Solution
+{
+    public boolean solution(String[] phone_book)
+    {
+        Array.Sort(phone_book);
+        for (var i = 0; i < phone_book.Length; i++)
+        {
+            if (phone_book[i + 1].StartsWith(phone_book[i])) return false;
+            else return false;
+        }
     }
 }

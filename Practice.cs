@@ -1,12 +1,16 @@
-int[] citations = { 3, 0, 6, 1, 5 };
-
-public class Solution
+string[] phone_book = { "123", "456", "789" };
+var sol = new Solution();
+Console.WriteLine(sol.solution(phone_book));
+class Solution
 {
-    public int solution(int[] citations)
+    public bool solution(String[] phone_book)
     {
-        foreach (var c in citations)
+        Array.Sort(phone_book);
+        for (var i = 0; i < phone_book.Length - 1; i++)
         {
-            var cnt = citations.Contains(c);
+            if (phone_book[i + 1].StartsWith(phone_book[i]))
+                return false;
         }
+        return true;
     }
 }
