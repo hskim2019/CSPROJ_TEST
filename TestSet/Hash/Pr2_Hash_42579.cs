@@ -38,8 +38,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-var genres = { "classic", "pop", "classic", "classic", "pop" };
-var plays = { 500, 600, 150, 800, 2500 };
+string[] genres = { "classic", "pop", "classic", "classic", "pop" };
+int[] plays = { 500, 600, 150, 800, 2500 };
 // [4, 1, 3, 0]
 
 public class Solution

@@ -34,7 +34,7 @@ var sol = new Solution();
 Console.WriteLine(sol.solution(phone_book));
 class Solution
 {
-    public boolean solution(String[] phone_book)
+    public bool solution(String[] phone_book)
     {
         Array.Sort(phone_book);
         for (var i = 0; i < phone_book.Length; i++)

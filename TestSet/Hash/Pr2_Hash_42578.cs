@@ -37,6 +37,8 @@ testCase = new string[,] {
     { "hat", "headgear" },
     { "sunglass", "eyewear" }
     };
+// testCase = new string[,] { { "yellow_hat", "headgear" }, { "blue_sunglasses", "eyewear" }, { "green_turban", "headgear" } };
+
 Console.WriteLine(sol.solution(testCase));
 
 public class Solution
