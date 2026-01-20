@@ -55,12 +55,12 @@ public class Solution
             // foreach 는 IEnumerable 을 이용해서 순회하는데, 
             // List<T> 컬렉션이 중간에 수정되므로(Remove) 버전 번호가 바뀌고
             // InvalidOperationException이 발생할 수 있으므로 ToList()로 복사를 하여 사용
-            foreach (var piece in pieces.ToList())
+            for (var i = 0; i < pieces.Count; i++)
             {
-                if (blank.Count == piece.Count && Match(blank, piece))
+                if (blank.Count == pieces[i].Count && Match(blank, pieces[i]))
                 {
                     score += blank.Count;   // 빈 칸 크기만큼 점수
-                    pieces.Remove(piece);   // 사용한 퍼즐 제거
+                    pieces.RemoveAt(i);   // 사용한 퍼즐 제거
                     break;
                 }
             }
