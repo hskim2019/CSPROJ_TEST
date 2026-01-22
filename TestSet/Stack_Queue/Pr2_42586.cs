@@ -19,8 +19,7 @@
 // int[] speeds = { 1, 30, 5 }
 // // return {2, 1}
 
-// int[] progresses = { 95, 90, 99, 99, 80, 99}
-// ;
+// int[] progresses = { 95, 90, 99, 99, 80, 99};
 // int[] speeds = { 1, 1, 1, 1, 1, 1 };
 // // return {1, 3, 2}
 
@@ -35,3 +34,50 @@
 // 모든 기능이 하루에 1%씩 작업이 가능하므로, 작업이 끝나기까지 남은 일수는 각각 5일, 10일, 1일, 1일, 20일, 1일입니다. 어떤 기능이 먼저 완성되었더라도 앞에 있는 모든 기능이 완성되지 않으면 배포가 불가능합니다.
 
 // 따라서 5일째에 1개의 기능, 10일째에 3개의 기능, 20일째에 2개의 기능이 배포됩니다.
+
+using System;
+using System.Collections.Generic;
+
+int[] progresses = { 95, 90, 99, 99, 80, 99 };
+int[] speeds = { 1, 1, 1, 1, 1, 1 };
+// // return {1, 3, 2}
+
+var sol = new Solution();
+Console.WriteLine(string.Join(", ", sol.solution(progresses, speeds)));
+
+
+public class Solution
+{
+    public int[] solution(int[] progresses, int[] speeds)
+    {
+        int n = progresses.Length;
+        int[] days = new int[n];
+
+        // 각 기능 완료까지 걸리는 일수 계산
+        for (int i = 0; i < n; i++)
+        {
+            days[i] = (int)Math.Ceiling((100 - progresses[i]) / (double)speeds[i]);
+        }
+
+        List<int> result = new List<int>();
+        int currentMax = days[0];
+        int count = 1;
+
+        for (int i = 1; i < n; i++)
+        {
+            if (days[i] <= currentMax)
+            {
+                count++;
+            }
+            else
+            {
+                result.Add(count);
+                currentMax = days[i];
+                count = 1;
+            }
+        }
+
+        result.Add(count); // 마지막 그룹 추가
+        return result.ToArray();
+    }
+}

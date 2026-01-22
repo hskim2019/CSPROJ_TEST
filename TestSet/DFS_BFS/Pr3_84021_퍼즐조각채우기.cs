@@ -3,6 +3,16 @@
 // https://howudong.tistory.com/158
 // https://velog.io/@soseuleaf/%ED%8D%BC%EC%A6%90-%EC%A1%B0%EA%B0%81-%EC%B1%84%EC%9A%B0%EA%B8%B0
 
+// 0이고!visited
+// ->visited 처리
+// ->q 에 담기
+// q에서 꺼내기
+//  -> 담기
+//  -> dir 확인
+//      -> 0이고 !visited 이면
+//          -> visited 처리
+//          -> q에 담기
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

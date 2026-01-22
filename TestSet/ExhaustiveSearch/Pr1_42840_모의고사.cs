@@ -28,3 +28,44 @@
 // 입출력 예 #2
 
 // 모든 사람이 2문제씩을 맞췄습니다.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+int[] answers = { 1, 3, 2, 4, 2 };
+var sol = new Solution();
+Console.WriteLine(string.Join(", ", sol.solution(answers)));
+
+public class Solution
+{
+    public int[] solution(int[] answers)
+    {
+        // 수포자들의 찍는 패턴
+        int[] first = { 1, 2, 3, 4, 5 };
+        int[] second = { 2, 1, 2, 3, 2, 4, 2, 5 };
+        int[] third = { 3, 3, 1, 1, 2, 2, 4, 4, 5, 5 };
+
+        // 맞춘 개수 카운트
+        int[] scores = new int[3];
+
+        for (int i = 0; i < answers.Length; i++)
+        {
+            if (answers[i] == first[i % first.Length]) scores[0]++;
+            if (answers[i] == second[i % second.Length]) scores[1]++;
+            if (answers[i] == third[i % third.Length]) scores[2]++;
+        }
+
+        // 최고 점수
+        int maxScore = scores.Max();
+
+        // 최고 점수를 받은 사람들 반환 (오름차순)
+        List<int> result = new List<int>();
+        for (int i = 0; i < scores.Length; i++)
+        {
+            if (scores[i] == maxScore)
+                result.Add(i + 1); // 사람 번호는 1부터 시작
+        }
+
+        return result.ToArray();
+    }
+}

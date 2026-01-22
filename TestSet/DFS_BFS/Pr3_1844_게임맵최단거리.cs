@@ -18,6 +18,16 @@
     * 1 ≤ n,m ≤ 100
 */
 
+// -시작점을 큐에 넣고, 거리 배열(dist)을 1로 초기화.
+// - 큐에서 하나 꺼내서 상하좌우 인접 칸을 확인.
+// - 갈 수 있고 아직 방문하지 않은 칸이면:
+// -dist[nx][ny] = dist[x][y] + 1
+// - 큐에 넣기
+// - 목표 지점에 도착하면 그때의 dist 값이 최단거리.
+// - 큐가 빌 때까지 탐색했는데 도착 못하면 -1 반환.
+
+using System;
+using System.Collections.Generic;
 
 // 결과: 11
 var maps1 = new int[][]
@@ -44,13 +54,49 @@ var sol = new Solution();
 Console.WriteLine(sol.solution(maps1)); // 11
 Console.WriteLine(sol.solution(maps2)); // -1
 
-using System;
 
-class Solution
+public class Solution
 {
-    public int solution(int[,] maps)
+    // 좌표 값형식 (튜플 대체)
+    public struct Point
     {
-        int answer = 0;
-        return answer;
+        public int X;
+        public int Y;
+        public Point(int x, int y) { X = x; Y = y; } // 초기값을 지정할 수 있게 해주는 생성자
+    }
+
+    public int solution(int[][] maps)
+    {
+        var n = maps.GetLength(0);
+        var m = maps[0].Length;
+        int[,] dist = new int[n, m];
+        int[] dx = { -1, 1, 0, 0 };
+        int[] dy = { 0, 0, -1, 1 };
+        var queue = new Queue<Point>();
+        queue.Enqueue(new Point(0, 0));
+        dist[0, 0] = 1;
+        while (queue.Count > 0)
+        {
+            var cur = queue.Dequeue();
+            var x = cur.X;
+            var y = cur.Y;
+            for (var dir = 0; dir < 4; dir++)
+            {
+                var nx = x + dx[dir];
+                var ny = y + dy[dir];
+                if (nx >= 0 && ny >= 0 && nx < n && ny < m)
+                {
+                    if (dist[nx, ny] == 0 && maps[nx][ny] == 1)
+                    {
+                        queue.Enqueue(new Point(nx, ny));
+                        dist[nx, ny] = dist[x, y] + 1;
+                    }
+                }
+            }
+        }
+
+        return dist[n - 1, m - 1] == 0 ? -1 : dist[n - 1, m - 1];
+
     }
 }
+
