@@ -21,3 +21,12 @@
 // [0, 1, 1]으로는 소수 [11, 101]를 만들 수 있습니다.
 
 // 11과 011은 같은 숫자로 취급합니다.
+
+using System;
+
+public class Solution {
+    public int solution(string numbers) {
+        int answer = 0;
+        return answer;
+    }
+}
