@@ -34,3 +34,56 @@
 
 // 입출력 예 #3
 // 명함들을 적절히 회전시켜 겹쳤을 때, 모든 명함을 포함하는 가장 작은 지갑의 크기는 133(=19 x 7)입니다.
+
+using System;
+using System.Security.Cryptography.X509Certificates;
+// int[,] sizes = { { 60, 50 }, { 30, 70 }, { 60, 30 }, { 80, 40 } }; // 4000
+int[,] sizes = { { 10, 7 }, { 12, 3 }, { 8, 15 }, { 14, 7 }, { 5, 15 } }; // 120
+// int[,] sizes = { { 14, 4 }, { 19, 6 }, { 6, 16 }, { 18, 7 }, { 7, 11 } }; // 133
+
+var sol = new Solution();
+Console.WriteLine(sol.solution(sizes));
+
+public class Solution
+{
+    public int solution(int[,] sizes)
+    {
+        int answer = 0;
+        int maxWidth = 0;
+        int maxHeight = 0;
+        for (int i = 0; i < sizes.GetLength(0); i++)
+        {
+            int w = sizes[i, 0];
+            int h = sizes[i, 1];
+            int mW = Math.Max(w, h);
+            int mH = Math.Min(w, h);
+            maxWidth = Math.Max(maxWidth, mW);
+            maxHeight = Math.Max(maxHeight, mH);
+        }
+        answer = maxWidth * maxHeight;
+        return answer;
+
+    }
+}
+
+// using System;
+// using System.Linq;
+
+// public class Solution
+// {
+//     public int solution(int[,] sizes)
+//     {
+//         // sizes를 IEnumerable로 변환
+//         var cards = Enumerable.Range(0, sizes.GetLength(0))
+//                               .Select(i => new
+//                               {
+//                                   Width = Math.Max(sizes[i, 0], sizes[i, 1]),
+//                                   Height = Math.Min(sizes[i, 0], sizes[i, 1])
+//                               });
+
+//         int maxWidth = cards.Max(c => c.Width);
+//         int maxHeight = cards.Max(c => c.Height);
+
+//         return maxWidth * maxHeight;
+//     }
+// }
