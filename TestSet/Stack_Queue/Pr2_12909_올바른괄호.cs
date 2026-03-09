@@ -24,10 +24,48 @@
 // var s = "(()("; // false
 
 using System;
-
-public class Solution {
-    public bool solution(string s) {
+var sol = new Solution();
+var s = ")()(";
+Console.WriteLine(sol.solution(s));
+public class Solution
+{
+    public bool solution(string s)
+    {
         bool answer = true;
+        char startBrace = '(';
+        char endBrace = ')';
+        Stack<char> stack = new Stack<char>();
+        char[] exp = s.ToCharArray();
+
+        foreach (char c in exp)
+        {
+            if (startBrace == c)
+            {
+                stack.Push(c);
+            }
+            if (endBrace == c)
+            {
+                if (stack.Count > 0)
+                {
+                    if (stack.Peek() == startBrace)
+                    {
+                        stack.Pop();
+                    }
+                    else
+                    {
+                        stack.Push(c);
+                    }
+                }
+                else
+                {
+                    stack.Push(c);
+                }
+            }
+        }
+        if (stack.Count > 0)
+        {
+            answer = false;
+        }
         return answer;
     }
 }
