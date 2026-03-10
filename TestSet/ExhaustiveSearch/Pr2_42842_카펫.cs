@@ -21,9 +21,26 @@
 
 using System;
 
-public class Solution {
-    public int[] solution(int brown, int yellow) {
-        int[] answer = new int[] {};
+public class Solution
+{
+    public int[] solution(int brown, int yellow)
+    {
+        int[] answer = new int[] { };
+        // 카펫의 총 격자 수는 갈색과 노란색의 합입니다.
+        int total = brown + yellow;
+        // 가능한 가로와 세로의 조합을 찾기 위해 반복문을 사용합니다.
+        for (int width = 3; width <= total; width++)
+        {
+            int height = total / width; // 세로 길이는 총 격자 수를 가로 길이로 나눈 값입니다.
+            if (width * height == total && width >= height)
+            { // 가로와 세로의 곱이 총 격자 수와 같고, 가로가 세로보다 크거나 같은 경우
+                if ((width - 2) * (height - 2) == yellow)
+                { // 내부 노란색 격자의 수가 주어진 yellow와 일치하는지 확인합니다.
+                    answer = new int[] { width, height }; // 조건을 만족하는 경우 가로와 세로를 answer에 저장합니다.
+                    break; // 조건을 만족하는 조합을 찾았으므로 반복문을 종료합니다.
+                }
+            }
+        }
         return answer;
     }
 }
