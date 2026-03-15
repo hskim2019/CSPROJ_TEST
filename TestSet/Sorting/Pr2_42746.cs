@@ -25,10 +25,10 @@ Console.Write(sol.solution(array));
 
 public class Solution
 {
-    public string solution(int[] array)
+    public string solution(int[] numbers)
     {
         // 숫자를 문자열로 변환
-        var strNumbers = array.Select(n => n.ToString()).ToArray();
+        var strNumbers = numbers.Select(n => n.ToString()).ToArray();
         Array.Sort(strNumbers, (a, b) => (b + a).CompareTo((a + b)));
         return String.Join("", strNumbers);
     }

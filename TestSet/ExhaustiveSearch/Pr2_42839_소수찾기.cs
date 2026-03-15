@@ -24,7 +24,8 @@
 // 11과 011은 같은 숫자로 취급합니다.
 
 using System;
-using System.Reflection;
+using System.Collections.Generic;
+
 
 string numbers = "179";
 var sol = new Solution();
@@ -34,66 +35,46 @@ public class Solution
 {
     public int solution(string numbers)
     {
-        string[] arr = numbers.Select(n => n.ToString()).ToArray();
-        HashSet<int> hs = new HashSet<int>();
-        int answer = 0;
-        for (int i = 1; i <= arr.Length; i++)
-        {
-            GeneratePermutations(arr, i, "", new bool[arr.Length], hs);
-        }
-        //Console.WriteLine(string.Join(", ", hs));
+        var set = new HashSet<int>();
+        var visited = new bool[numbers.Length];
 
-        foreach (int num in hs)
-        {
-            if (IsPrime(num))
-            {
-                answer++;
-            }
+        // 모든 길이에 대해 순열 생성
+        for (int len = 1; len <= numbers.Length; len++) {
+            DFS(numbers, "", len, visited, set);
         }
-        return answer;
+
+        int count = 0;
+        foreach (var num in set) {
+            if (IsPrime(num)) count++;
+        }
+
+        return count;
+
     }
 
-    public void GeneratePermutations(string[] arr, int targetLength, string current, bool[] used, HashSet<int> resultSet)
-    {
-
-        //Console.WriteLine("targetLength : " + targetLength.ToString() + " current : " + current);
-        if (targetLength == current.Length)
-        {
-            resultSet.Add(int.Parse(current));
+     // DFS로 숫자 조합 생성
+    void DFS(string numbers, string current, int targetLen, bool[] visited, HashSet<int> set) {
+        if (current.Length == targetLen) {
+            set.Add(int.Parse(current));
             return;
         }
 
-        for (var i = 0; i < arr.Length; i++)
-        {
-
-            if (!used[i])
-            {
-                used[i] = true;
-                GeneratePermutations(arr, targetLength, current + arr[i], used, resultSet);
-                used[i] = false;
+        for (int i = 0; i < numbers.Length; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                DFS(numbers, current + numbers[i], targetLen, visited, set);
+                visited[i] = false;
             }
         }
     }
 
-    public bool IsPrime(int num)
-    {
-
-        if (num < 2)
-        {
-            return false;
-        }
-        if (num == 2)
-        {
-            return true;
-        }
-        var sqrt = (int)Math.Sqrt(num);
-        for (var i = 2; i < sqrt + 1; i++)
-        {
-            if (num % i == 0)
-            {
-                return false;
-            }
+    // 소수 판별
+    bool IsPrime(int num) {
+        if (num < 2) return false;
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0) return false;
         }
         return true;
     }
+
 }
