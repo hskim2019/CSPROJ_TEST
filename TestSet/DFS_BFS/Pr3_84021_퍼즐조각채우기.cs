@@ -41,12 +41,14 @@ var sol = new Solution();
 Console.WriteLine(sol.solution(game_board, table));
 
 
-public class Solution {
+public class Solution
+{
     int n;
     int[] dx = { -1, 1, 0, 0 };
     int[] dy = { 0, 0, -1, 1 };
 
-    public int solution(int[,] game_board, int[,] table) {
+    public int solution(int[,] game_board, int[,] table)
+    {
         n = game_board.GetLength(0);
 
         var blanks = ExtractShapes(game_board, 0); // 빈 공간
@@ -55,48 +57,61 @@ public class Solution {
         int answer = 0;
         var used = new bool[pieces.Count];
 
-        foreach (var blank in blanks) {
-            for (int i = 0; i < pieces.Count; i++) {
+        foreach (var blank in blanks)
+        {
+            bool matched = false; // 현재 blank에 맞는 조각을 찾았는지 여부
+
+            for (int i = 0; i < pieces.Count && !matched; i++)
+            {
                 if (used[i]) continue;
                 var piece = pieces[i];
 
-                for (int r = 0; r < 4; r++) {
+                for (int r = 0; r < 4; r++)
+                {
                     var rotated = Rotate(piece, r);
-                    if (EqualShape(blank, rotated)) {
+                    if (EqualShape(blank, rotated))
+                    {
                         answer += blank.Count;
                         used[i] = true;
-                        goto NextBlank;
+                        matched = true; // 조각을 찾았으니 더 이상 반복할 필요 없음
+                        break;          // 회전 루프 탈출
                     }
                 }
             }
-            NextBlank:;
         }
 
         return answer;
     }
 
     // BFS로 모양 추출
-    List<List<(int,int)>> ExtractShapes(int[,] board, int target) {
-        var visited = new bool[n,n];
-        var shapes = new List<List<(int,int)>>();
+    List<List<(int, int)>> ExtractShapes(int[,] board, int target)
+    {
+        var visited = new bool[n, n];
+        var shapes = new List<List<(int, int)>>();
 
-        for (int i=0; i<n; i++) {
-            for (int j=0; j<n; j++) {
-                if (!visited[i,j] && board[i,j]==target) {
-                    var q = new Queue<(int,int)>();
-                    var shape = new List<(int,int)>();
-                    q.Enqueue((i,j));
-                    visited[i,j] = true;
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (!visited[i, j] && board[i, j] == target)
+                {
+                    var q = new Queue<(int, int)>();
+                    var shape = new List<(int, int)>();
+                    q.Enqueue((i, j));
+                    visited[i, j] = true;
 
-                    while (q.Count>0) {
-                        var (x,y) = q.Dequeue();
-                        shape.Add((x,y));
-                        for (int d=0; d<4; d++) {
-                            int nx=x+dx[d], ny=y+dy[d];
-                            if (nx>=0 && ny>=0 && nx<n && ny<n &&
-                                !visited[nx,ny] && board[nx,ny]==target) {
-                                visited[nx,ny]=true;
-                                q.Enqueue((nx,ny));
+                    while (q.Count > 0)
+                    {
+                        var (x, y) = q.Dequeue();
+                        shape.Add((x, y));
+                        for (int d = 0; d < 4; d++)
+                        {
+                            int nx = x + dx[d], ny = y + dy[d];
+                            if (nx >= 0 && ny >= 0 && nx < n && ny < n &&
+                                !visited[nx, ny] && board[nx, ny] == target)
+                            {
+                                visited[nx, ny] = true;
+                                q.Enqueue((nx, ny));
                             }
                         }
                     }
@@ -108,26 +123,30 @@ public class Solution {
     }
 
     // 좌표 정규화
-    List<(int,int)> Normalize(List<(int,int)> shape) {
-        int minX = shape.Min(p=>p.Item1);
-        int minY = shape.Min(p=>p.Item2);
-        return shape.Select(p=>(p.Item1-minX, p.Item2-minY))
-                    .OrderBy(p=>p.Item1).ThenBy(p=>p.Item2).ToList();
+    List<(int, int)> Normalize(List<(int, int)> shape)
+    {
+        int minX = shape.Min(p => p.Item1);
+        int minY = shape.Min(p => p.Item2);
+        return shape.Select(p => (p.Item1 - minX, p.Item2 - minY))
+                    .OrderBy(p => p.Item1).ThenBy(p => p.Item2).ToList();
     }
 
     // 회전
-    List<(int,int)> Rotate(List<(int,int)> shape, int times) {
-        var rotated = shape.Select(p=>{
-            int x=p.Item1, y=p.Item2;
-            for (int t=0; t<times; t++) (x,y)=(y,n-1-x);
-            return (x,y);
+    List<(int, int)> Rotate(List<(int, int)> shape, int times)
+    {
+        var rotated = shape.Select(p =>
+        {
+            int x = p.Item1, y = p.Item2;
+            for (int t = 0; t < times; t++) (x, y) = (y, n - 1 - x);
+            return (x, y);
         }).ToList();
         return Normalize(rotated);
     }
 
     // 모양 비교
-    bool EqualShape(List<(int,int)> a, List<(int,int)> b) {
-        if (a.Count!=b.Count) return false;
+    bool EqualShape(List<(int, int)> a, List<(int, int)> b)
+    {
+        if (a.Count != b.Count) return false;
         return a.SequenceEqual(b);
     }
 }

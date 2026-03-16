@@ -1,72 +1,53 @@
 using System;
+using System.Collections.Generic;
 
-string numbers = "011";
+var maps1 = new int[,] {
+    {1, 0, 1, 1, 1},
+    {1, 0, 1, 0, 1},
+    {1, 0, 1, 1, 1},
+    {1, 1, 1, 0, 1},
+    {0, 0, 0, 0, 1}
+};
 var sol = new Solution();
-Console.WriteLine(sol.solution(numbers));
-
+Console.WriteLine(sol.solution(maps1)); // 11
 public class Solution
 {
-    public int solution(string numbers)
-    {
-        string[] arr = numbers.Select(n => n.ToString()).ToArray();
-        HashSet<int> hs = new HashSet<int>();
-        int answer = 0;
-        for (int i = 1; i <= arr.Length; i++)
-        {
-            GeneratePermutations(arr, i, "", new bool[arr.Length], hs);
-        }
-        Console.WriteLine(string.Join(", ", hs));
 
-        foreach (int num in hs)
+    public int solution(int[,] maps)
+    {
+        int n = maps.GetLength(0);
+        int m = maps.GetLength(1);
+        int[,] dist = new int[n, m];
+        for (int i = 0; i < n; i++)
         {
-            if (IsPrime(num))
+            for (int j = 0; j < m; j++)
             {
-                answer++;
+                dist[i, j] = -1;
             }
         }
-        return answer;
-    }
-
-    public void GeneratePermutations(string[] arr, int targetLength, string current, bool[] used, HashSet<int> resultSet)
-    {
-
-        if (targetLength == current.Length)
+        int[] dx = { -1, 1, 0, 0 };
+        int[] dy = { 0, 0, -1, 1 };
+        var queue = new Queue<(int, int)>();
+        queue.Enqueue((0, 0));
+        dist[0, 0] = 1;
+        while (queue.Count > 0)
         {
-            resultSet.Add(int.Parse(current));
-            return;
-        }
-
-        for (var i = 0; i < arr.Length; i++)
-        {
-
-            if (!used[i])
+            var (x, y) = queue.Dequeue();
+            for (int dir = 0; dir < 4; dir++)
             {
-                used[i] = true;
-                GeneratePermutations(arr, targetLength, current + arr[i], used, resultSet);
-                used[i] = false;
+                var nx = x + dx[dir];
+                var ny = y + dy[dir];
+                if (nx >= 0 && ny >= 0 && nx < n && ny < m)
+                {
+                    if (maps[nx, ny] == 1 && dist[nx, ny] == -1)
+                    {
+                        dist[nx, ny] = dist[x, y] + 1;
+                        queue.Enqueue((nx, ny));
+                    }
+                }
             }
         }
-    }
+        return dist[n - 1, m - 1];
 
-    public bool IsPrime(int num)
-    {
-
-        if (num < 2)
-        {
-            return false;
-        }
-        if (num == 2)
-        {
-            return true;
-        }
-        var sqrt = Math.Sqrt(num);
-        for (var i = 2; i < sqrt + 1; i++)
-        {
-            if (num % i == 0)
-            {
-                return false;
-            }
-        }
-        return true;
     }
 }
