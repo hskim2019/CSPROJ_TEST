@@ -29,27 +29,23 @@
 using System;
 using System.Collections.Generic;
 
-// 결과: 11
-var maps1 = new int[][]
-{
-    new int[] {1, 0, 1, 1, 1},
-    new int[] {1, 0, 1, 0, 1},
-    new int[] {1, 0, 1, 1, 1},
-    new int[] {1, 1, 1, 0, 1},
-    new int[] {0, 0, 0, 0, 1}
+// 테스트 데이터는 int[,] 으로 선언해야 함
+var maps1 = new int[,] {
+    {1, 0, 1, 1, 1},
+    {1, 0, 1, 0, 1},
+    {1, 0, 1, 1, 1},
+    {1, 1, 1, 0, 1},
+    {0, 0, 0, 0, 1}
 };
 
-// 결과: -1
-var maps2 = new int[][]
-{
-    new int[] {1, 0, 1, 1, 1},
-    new int[] {1, 0, 1, 0, 1},
-    new int[] {1, 0, 1, 1, 1},
-    new int[] {1, 1, 1, 0, 0},
-    new int[] {0, 0, 0, 0, 1}
+var maps2 = new int[,] {
+    {1, 0, 1, 1, 1},
+    {1, 0, 1, 0, 1},
+    {1, 0, 1, 1, 1},
+    {1, 1, 1, 0, 0},
+    {0, 0, 0, 0, 1}
 };
 
-// 호출
 var sol = new Solution();
 Console.WriteLine(sol.solution(maps1)); // 11
 Console.WriteLine(sol.solution(maps2)); // -1
@@ -57,46 +53,46 @@ Console.WriteLine(sol.solution(maps2)); // -1
 
 public class Solution
 {
-    // 좌표 값형식 (튜플 대체)
-    public struct Point
+    public int solution(int[,] maps)
     {
-        public int X;
-        public int Y;
-        public Point(int x, int y) { X = x; Y = y; } // 초기값을 지정할 수 있게 해주는 생성자
-    }
+        int n = maps.GetLength(0); // 행
+        int m = maps.GetLength(1); // 열
 
-    public int solution(int[][] maps)
-    {
-        var n = maps.GetLength(0);
-        var m = maps[0].Length;
+        // 거리 배열: -1로 초기화 (방문 안 함)
         int[,] dist = new int[n, m];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                dist[i, j] = -1;
+
+        // BFS 준비
         int[] dx = { -1, 1, 0, 0 };
         int[] dy = { 0, 0, -1, 1 };
-        var queue = new Queue<Point>();
-        queue.Enqueue(new Point(0, 0));
+        var queue = new Queue<(int x, int y)>();
+
+        // 시작점
+        queue.Enqueue((0, 0));
         dist[0, 0] = 1;
+
         while (queue.Count > 0)
         {
-            var cur = queue.Dequeue();
-            var x = cur.X;
-            var y = cur.Y;
-            for (var dir = 0; dir < 4; dir++)
+            var (x, y) = queue.Dequeue();
+
+            for (int dir = 0; dir < 4; dir++)
             {
-                var nx = x + dx[dir];
-                var ny = y + dy[dir];
+                int nx = x + dx[dir];
+                int ny = y + dy[dir];
+
                 if (nx >= 0 && ny >= 0 && nx < n && ny < m)
                 {
-                    if (dist[nx, ny] == 0 && maps[nx][ny] == 1)
+                    if (maps[nx, ny] == 1 && dist[nx, ny] == -1)
                     {
-                        queue.Enqueue(new Point(nx, ny));
                         dist[nx, ny] = dist[x, y] + 1;
+                        queue.Enqueue((nx, ny));
                     }
                 }
             }
         }
 
-        return dist[n - 1, m - 1] == 0 ? -1 : dist[n - 1, m - 1];
-
+        return dist[n - 1, m - 1];
     }
 }
-
