@@ -16,8 +16,8 @@
 
 using System;
 
-int brown = 10;
-int yellow = 2;
+// int brown = 10;
+// int yellow = 2;
 // [4, 3]
 
 // int brown = 8;

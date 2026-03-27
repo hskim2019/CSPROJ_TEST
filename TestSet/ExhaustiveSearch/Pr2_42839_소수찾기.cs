@@ -37,14 +37,19 @@ public class Solution
     {
         var set = new HashSet<int>();
         var visited = new bool[numbers.Length];
+        char[] arr = numbers.ToCharArray();
 
         // 모든 길이에 대해 순열 생성
-        for (int len = 1; len <= numbers.Length; len++) {
-            DFS(numbers, "", len, visited, set);
+        for (int len = 1; len <= numbers.Length; len++)
+        {
+            //DFS(numbers, "", len, visited, set);
+            Permute(arr, len, set);
+
         }
 
         int count = 0;
-        foreach (var num in set) {
+        foreach (var num in set)
+        {
             if (IsPrime(num)) count++;
         }
 
@@ -52,15 +57,19 @@ public class Solution
 
     }
 
-     // DFS로 숫자 조합 생성
-    void DFS(string numbers, string current, int targetLen, bool[] visited, HashSet<int> set) {
-        if (current.Length == targetLen) {
+    // DFS로 숫자 조합 생성
+    void DFS(string numbers, string current, int targetLen, bool[] visited, HashSet<int> set)
+    {
+        if (current.Length == targetLen)
+        {
             set.Add(int.Parse(current));
             return;
         }
 
-        for (int i = 0; i < numbers.Length; i++) {
-            if (!visited[i]) {
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            if (!visited[i])
+            {
                 visited[i] = true;
                 DFS(numbers, current + numbers[i], targetLen, visited, set);
                 visited[i] = false;
@@ -68,10 +77,46 @@ public class Solution
         }
     }
 
+    // 순열 생성 (재귀 없이)
+    void Permute(char[] arr, int targetLen, HashSet<int> set)
+    {
+        bool[] visited = new bool[arr.Length];
+        Stack<(string, bool[])> stack = new Stack<(string, bool[])>();
+        stack.Push(("", visited));
+
+        while (stack.Count > 0)
+        {
+            var (current, used) = stack.Pop();
+            if (current.Length == targetLen)
+            {
+                set.Add(int.Parse(current));
+                continue;
+            }
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (!used[i])
+                {
+                    bool[] nextUsed = (bool[])used.Clone();
+                    nextUsed[i] = true;
+                    stack.Push((current + arr[i], nextUsed));
+                }
+            }
+        }
+        //         str
+        // ""  : for문
+        //      i = 0 / stack "1" { true, false, false} -> pop->stack "12" { true, true, false}, "13" { true,false, true}
+        //         i = 1 / stack "2" { false, true, false}
+        //         i = 2 / stack "3" { false, false, true}
+    }
+
+
     // 소수 판별
-    bool IsPrime(int num) {
+    bool IsPrime(int num)
+    {
         if (num < 2) return false;
-        for (int i = 2; i * i <= num; i++) {
+        for (int i = 2; i * i <= num; i++)
+        {
             if (num % i == 0) return false;
         }
         return true;

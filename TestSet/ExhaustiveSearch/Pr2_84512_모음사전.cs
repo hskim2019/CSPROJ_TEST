@@ -42,10 +42,21 @@
 
 // "EIO"는 1189번째 단어입니다.
 
+// 📌 781이 나오는 과정
+// 단어 길이는 1~5까지 가능하므로, 첫 번째 자리가 A일 때 뒤에 붙을 수 있는 경우들을 모두 합산합니다.
+// - 길이 1: "A" → 1개
+// - 길이 2: "AA", "AE", "AI", "AO", "AU" → 5개
+// - 길이 3: "AAA", "AAE", ... "AUU" → 5 ^ 2 = 25개
+// - 길이 4: "AAAA", ... "AUUU" → 5 ^ 3 = 125개
+// - 길이 5: "AAAAA", ... "AUUUU" → 5 ^ 4 = 625개
+
+
 using System;
 
-public class Solution {
-    public int solution(string word) {
+public class Solution
+{
+    public int solution(string word)
+    {
         int answer = 0;
         return answer;
     }

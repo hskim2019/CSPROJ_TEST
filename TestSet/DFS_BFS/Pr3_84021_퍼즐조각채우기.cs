@@ -119,6 +119,10 @@ public class Solution
                 }
             }
         }
+        foreach (var shape in shapes)
+        {
+            Console.WriteLine(string.Join(" ", shape.Select(p => $"({p.Item1}, {p.Item2})")));
+        }
         return shapes;
     }
 
