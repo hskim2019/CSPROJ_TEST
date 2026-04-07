@@ -37,10 +37,10 @@ class Solution
     public bool solution(String[] phone_book)
     {
         Array.Sort(phone_book);
-        for (var i = 0; i < phone_book.Length; i++)
+        for (var i = 0; i < phone_book.Length - 1; i++)
         {
             if (phone_book[i + 1].StartsWith(phone_book[i])) return false;
-            else return false;
         }
+        return true;
     }
 }

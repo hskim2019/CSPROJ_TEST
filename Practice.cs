@@ -1,25 +1,14 @@
-using System;
+string[] genres = { "classic", "pop", "classic", "classic", "pop" };
+int[] plays = { 500, 600, 150, 800, 2500 };
 
-string word = "I";
-var sol = new Solution();
-Console.WriteLine(sol.solution(word));
 public class Solution
 {
-    public int solution(string word)
+    public int[] solution(string[] genres, int[] plays)
     {
-        int answer = 0;
-        string[] vowels = { "A", "E", "I", "O", "U" };
-        var weight = new int[5];
-        weight[0] = 1;
-        for (int i = 1; i < 5; i++)
+        var dict = new Dictionary<string, List<(int, int)>>();
+        for (int i = 0; i < genres.Length; i++)
         {
-            weight[i] = weight[i - 1] + (int)Math.Pow(5, i);
+
         }
-        //Console.WriteLine(string.Join(", ", weight));
-        for (int i = 0; i < word.Length; i++)
-        {
-            answer += Array.IndexOf(vowels, word[i].ToString()) * weight[i] + 1;
-        }
-        return answer;
     }
 }
